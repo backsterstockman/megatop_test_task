@@ -1,6 +1,7 @@
 import openpyxl.workbook
-import requests
 import openpyxl
+import aiohttp
+
 
 class Category():
     def __init__(self, id, name, level_of_investigation, childs):
@@ -13,11 +14,12 @@ class Category():
         return f'{self.id}, {self.name}, {self.level_of_investigation}'
 
 
-def get_categories(url: str) -> list:
-    response = requests.get(url)
-    data = response.json()
-    data = data[2:]
-    return data
+async def get_categories(url: str) -> list:
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            data = await response.json()
+            data = data[2:]
+            return data
 
 
 def build_categories(nodes: list, level: int = 1) -> list[Category]:
