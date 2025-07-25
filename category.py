@@ -28,11 +28,11 @@ def build_categories(nodes: list, level: int = 1) -> list[Category]:
         children = build_categories(node.get('childs', []), level + 1)
         # если раскомментировать строку, то будет вложенность 99 для последних предметов
         # так нужно в тз, но я посчитал, что это не совсем корректно
-        # current_level = 99 if not children else level
+        current_level = 99 if not children and level != 1 else level
         category = Category(
             id=node['id'],
             name=node['name'],
-            level_of_investigation=level,  # current_level
+            level_of_investigation=current_level,  # current_level
             childs=children
         )
         categories.append(category)
