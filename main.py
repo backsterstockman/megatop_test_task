@@ -19,7 +19,7 @@ async def main():
 
         categories = build_categories(data)
         # print_categories(categories)
-        write_categories_to_file(categories, 'categories.xlsx')
+        write_categories_to_file(categories, 'result.xlsx')
 
 
 if __name__ == "__main__":
